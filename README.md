@@ -91,13 +91,26 @@ Tests/                          Framework-independent PHPUnit tests for the secu
                                  validation, asset selection)
 ```
 
+## Database tables
+
+Tables are created via the standard `Plugin::install()` hook (see
+`GitHubPluginInstaller.php`), which Matomo calls automatically the first
+time the plugin is activated.
+
+If you activated an older version of this plugin before `install()` was
+wired up, Matomo will **not** retroactively call it - you'll hit
+`Base table or view not found` errors. Fix it once with:
+
+```bash
+php console githubplugininstaller:create-tables
+```
+
+This re-runs the same idempotent migrations `install()` uses, so it's
+safe to run any time (including repeatedly).
+
 ## Known limitations / next steps
 
-- Database migrations in `Infrastructure/Migrations/` follow the same
-  pattern as this codebase's other plugins (e.g. GeoPrecision) but, as
-  with those, are not yet wired into an automatic runner - run/verify them
-  against your actual Matomo installation's migration mechanism before
-  relying on them in production.
+
 - No UI affordance yet for picking an older release for rollback beyond
   what `getReleases` already returns to the admin page; the admin UI
   currently only renders "add repository" + remove, not yet a full
