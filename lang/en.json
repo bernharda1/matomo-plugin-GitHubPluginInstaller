@@ -1,0 +1,20 @@
+{
+  "GitHubPluginInstaller": {
+    "PluginName": "GitHub Plugin Installer",
+    "MenuTitle": "GitHub Plugin Installer",
+    "TrustWarning": "Installing a plugin from a GitHub repository runs arbitrary PHP code on this server with full Matomo privileges as soon as it is activated. Only add repositories you trust and review their release contents first.",
+    "TrackedRepositories": "Tracked Repositories",
+    "ColumnOwner": "Owner",
+    "ColumnRepo": "Repository",
+    "ColumnPrivate": "Has Token",
+    "ColumnInstalledTag": "Installed Tag",
+    "NoRepositories": "No repositories are tracked yet.",
+    "AddRepository": "Add Repository",
+    "TokenLabel": "Personal Access Token (only needed for private repositories)",
+    "TokenPlaceholder": "ghp_... (leave empty for public repos)",
+    "AssetPatternLabel": "Asset name pattern (optional regex, e.g. to pick among multiple release files)",
+    "ConfirmRemove": "Stop tracking this repository? Already installed plugin files are not removed.",
+    "InstallHint": "Installing places plugin files under plugins/<Name> but does not activate them. Activate the new plugin from the standard Matomo plugin management page once you have reviewed it.",
+    "UpdateAvailable": "Update available: %1$s/%2$s has release %3$s (currently installed: %4$s)"
+  }
+}

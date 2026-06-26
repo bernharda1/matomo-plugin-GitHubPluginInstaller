@@ -1,0 +1,73 @@
+{% extends 'admin.twig' %}
+
+{% set title %}{{ 'GitHubPluginInstaller_MenuTitle'|translate }}{% endset %}
+
+{% block content %}
+<div class="githubplugininstaller">
+    <h2>{{ title }}</h2>
+
+    <div class="alert alert-warning">
+        {{ 'GitHubPluginInstaller_TrustWarning'|translate }}
+    </div>
+
+    <h3>{{ 'GitHubPluginInstaller_TrackedRepositories'|translate }}</h3>
+
+    <table class="entityTable dataTable">
+        <thead>
+        <tr>
+            <th>{{ 'GitHubPluginInstaller_ColumnOwner'|translate }}</th>
+            <th>{{ 'GitHubPluginInstaller_ColumnRepo'|translate }}</th>
+            <th>{{ 'GitHubPluginInstaller_ColumnPrivate'|translate }}</th>
+            <th>{{ 'GitHubPluginInstaller_ColumnInstalledTag'|translate }}</th>
+            <th>{{ 'General_Actions'|translate }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for repository in repositories %}
+            <tr>
+                <td>{{ repository.owner }}</td>
+                <td>{{ repository.repo }}</td>
+                <td>{{ repository.hasToken ? 'General_Yes'|translate : 'General_No'|translate }}</td>
+                <td>{{ repository.last_installed_tag ?: '-' }}</td>
+                <td>
+                    <a href="{{ linkTo({'module':'GitHubPluginInstaller','action':'removeRepository','idRepo':repository.id,'nonce':nonce}) }}"
+                       onclick="return confirm('{{ 'GitHubPluginInstaller_ConfirmRemove'|translate }}');">
+                        {{ 'General_Remove'|translate }}
+                    </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr><td colspan="5">{{ 'GitHubPluginInstaller_NoRepositories'|translate }}</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>{{ 'GitHubPluginInstaller_AddRepository'|translate }}</h3>
+
+    <form method="post" action="{{ linkTo({'module':'GitHubPluginInstaller','action':'addRepository'}) }}">
+        <input type="hidden" name="nonce" value="{{ nonce }}" />
+
+        <p>
+            <label>{{ 'GitHubPluginInstaller_ColumnOwner'|translate }}</label>
+            <input type="text" name="owner" required="required" placeholder="e.g. bernharda1" />
+        </p>
+        <p>
+            <label>{{ 'GitHubPluginInstaller_ColumnRepo'|translate }}</label>
+            <input type="text" name="repo" required="required" placeholder="e.g. matomo-plugin-Example" />
+        </p>
+        <p>
+            <label>{{ 'GitHubPluginInstaller_TokenLabel'|translate }}</label>
+            <input type="password" name="token" placeholder="{{ 'GitHubPluginInstaller_TokenPlaceholder'|translate }}" />
+        </p>
+        <p>
+            <label>{{ 'GitHubPluginInstaller_AssetPatternLabel'|translate }}</label>
+            <input type="text" name="assetPattern" placeholder="/^MyPlugin-.*\.zip$/" />
+        </p>
+        <p>
+            <input type="submit" class="btn" value="{{ 'GitHubPluginInstaller_AddRepository'|translate }}" />
+        </p>
+    </form>
+
+    <p class="muted">{{ 'GitHubPluginInstaller_InstallHint'|translate }}</p>
+</div>
+{% endblock %}

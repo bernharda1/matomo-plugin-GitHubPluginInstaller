@@ -1,0 +1,15 @@
+{
+  "name": "GitHubPluginInstaller",
+  "description": "Installs and updates Matomo plugins from GitHub repository releases (.zip/.tar.gz), supporting both public and private repositories.",
+  "version": "0.1.0",
+  "theme": false,
+  "require": {
+    "matomo": ">=5.0.0"
+  },
+  "authors": [
+    {
+      "name": "Matomo Extension Team"
+    }
+  ],
+  "license": "GPL v3+"
+}
