@@ -45,7 +45,7 @@ broad `repo` scope.
 
 ### Admin UI
 
-`Administration > Manage > GitHub Plugin Installer`. Add a repository
+`Administration > Platform > GitHub Plugin Installer`. Add a repository
 (owner/repo, optional token for private repos, optional asset name
 regex if a release ships more than one `.zip`/`.tar.gz`), browse its
 releases, and install a chosen tag. The plugin is placed on disk; activate
